@@ -68,14 +68,14 @@ public:
         else
             return NULL; // standardize to returning NULL.
     }
-    void* Realloc(void* originalPtr, size_t originalSize, size_t newSize) {
-        (void)originalSize;
-        if (newSize == 0) {
-            kytFree(originalPtr);
-            return NULL;
-        }
-        return kytRealloc(originalPtr, originalSize, newSize);
-    }
+	void* Realloc(void* originalPtr, size_t originalSize, size_t newSize) {
+		(void)originalSize;
+		if (newSize == 0) {
+			kytFree(originalPtr);
+			return NULL;
+		}
+		return kytRealloc(originalPtr, newSize);
+	}
     static void Free(void *ptr) { kytFree(ptr); }
 };
 
