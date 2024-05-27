@@ -85,19 +85,19 @@ public:
     static const bool kNeedFree = true;
     void* Malloc(size_t size) { 
         if (size) //  behavior of malloc(0) is implementation defined.
-            return Kyt::KytMalloc(size);
+            return Kyt::kytMalloc(size);
         else
             return NULL; // standardize to returning NULL.
     }
     void* Realloc(void* originalPtr, size_t originalSize, size_t newSize) {
         (void)originalSize;
         if (newSize == 0) {
-            Kyt::KytFree(originalPtr);
+            Kyt::kytFree(originalPtr);
             return NULL;
         }
-        return Kyt::KytRealloc(originalPtr, originalSize, newSize);
+        return Kyt::kytRealloc(originalPtr, newSize);
     }
-    static void Free(void *ptr) RAPIDJSON_NOEXCEPT { Kyt::KytFree(ptr); }
+    static void Free(void *ptr) RAPIDJSON_NOEXCEPT { Kyt::kytFree(ptr); }
 
     bool operator==(const CrtAllocator&) const RAPIDJSON_NOEXCEPT {
         return true;
